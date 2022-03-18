@@ -13,3 +13,9 @@
 Harr wavelet transformation and then applying huffman coding to the resulting sparse matrix
 
 - https://www.cmi.ac.in/~ksutar/NLA2013/imagecompression.pdf
+
+## Execution
+
+- `pip install -r requirements.txt`
+- Run `example.sh` or `example.bat` for an example
+- Run `compressor.py`
