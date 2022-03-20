@@ -1,3 +1,4 @@
+import os
 from sys import argv, exit
 from numpy import uint8
 from imageio import imwrite, imread
@@ -55,6 +56,15 @@ if __name__ == '__main__':
 
     print('Compressing...')
 
-    imwrite(args.output, newMatrix)
+    try:
+        imwrite(args.output, newMatrix)
+    except:
+        print('Warning: Invalid output file')
+        inpPath = list(os.path.splitext(args.input))
+        inpPath.insert(-1, '_compressed')
+        args.output = ''.join(inpPath)
 
-    print('Image compressed successfully!')
+        imwrite(args.output, newMatrix)
+        print(f'\nNew image at {args.output}')
+
+    print('\nImage compressed successfully!\n')
