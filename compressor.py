@@ -16,8 +16,9 @@ def average(matrix):
     return [uint8(R/l), uint8(G/l), uint8(B/l)]
 
 
-def compressMatrix(average, size, matrix):
-    X, Y = matrix.shape[0:2]
+def compressMatrix(callback, size, matrix):
+    X, Y, Z = matrix.shape
+    print(X,Y,Z)
     X = int(X/size)
     Y = int(Y/size)
 
@@ -26,7 +27,7 @@ def compressMatrix(average, size, matrix):
     for x in range(0, X):
         row = []
         for y in range(0, Y):
-            row.append(average(matrix[x*size:x*size+size, y*size:y*size+size]))
+            row.append(callback(matrix[x*size:x*size+size, y*size:y*size+size]))
         newMatrix.append(row)
     return newMatrix
 

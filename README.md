@@ -19,3 +19,11 @@ Harr wavelet transformation and then applying huffman coding to the resulting sp
 - `pip install -r requirements.txt`
 - Run `example.sh` or `example.bat` for an example
 - Run `compressor.py`
+
+## To-Do 
+
+- Figure out transformation : 
+  - SVD 
+  - DCT 
+  - And more 
+- Decide b/w huffman coding and LZ77
