@@ -19,8 +19,7 @@ def average(matrix):
 
 
 def compressMatrix(callback, size, matrix):
-    X, Y, Z = matrix.shape
-    print(X,Y,Z)
+    X, Y = matrix.shape[0:2]
     X = int(X/size)
     Y = int(Y/size)
 
