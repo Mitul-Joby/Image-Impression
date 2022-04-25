@@ -5,7 +5,8 @@ import numpy as np
 from imageio import imwrite, imread
 from argparse import ArgumentParser
 import math
-import cv2
+import cv2 
+import os
 
 def im2double(im):
     """method to get double precision of a channel"""
@@ -13,7 +14,7 @@ def im2double(im):
     return im.astype(np.float64) / info.max
 
 def SVD_compress_init(img,k):
-    #This function solely converts the image to seperate channels and calculate the decomposed matrices 
+    # This function solely converts the image to seperate channels and calculate the decomposed matrices 
     # of each of these channels using SVD 
     # This alone does not lead to compression 
     # Dropping of the singular values along with the U and Vt counterparts is what leads to 
@@ -26,10 +27,6 @@ def SVD_compress_init(img,k):
     [u_r, s_i_r, vt_r] = np.linalg.svd(r_channel)
     [u_b, s_i_b, vt_b] = np.linalg.svd(b_channel)
     [u_g, s_i_g, vt_g] = np.linalg.svd(g_channel)
-    # s_i_b : singular values intermedite, not diagonal array yet
-    # s_r[:img.shape[0],:img.shape[0]] = np.diag(s_i_r)
-    # s_b[:img.shape[0],:img.shape[0]] = np.diag(s_i_b)
-    # s_g[:img.shape[0],:img.shape[0]] = np.diag(s_i_g)
     print("Inital number of singular values : ",s_i_r.size,s_i_b.size,s_i_g.size)
     [u_r_opt,s_r_opt,vt_r_opt] = drop_svals(u_r,s_i_r,vt_r,k)
     [u_g_opt,s_g_opt,vt_g_opt] = drop_svals(u_g,s_i_g,vt_g,k)
@@ -55,9 +52,6 @@ def drop_svals(u,s,vt,k):
     return [opt_u,opt_s,opt_vt]
 
 
-
-
-
 if __name__ == '__main__':
 
     parser = ArgumentParser(description='Simple Image Compresser')
@@ -81,12 +75,14 @@ if __name__ == '__main__':
 
     print('Compressing...')
 
-    # newMatrix = compressMatrix(average, args.size, matrix)
     comp_matrix = SVD_compress_init(matrix,args.vals)
 
 
     try:
         imwrite(args.output, comp_matrix)
+        print("Initial image size : ",os.path.getsize(args.input),sep="")
+        print("Output image size : ", os.path.getsize(args.output),sep="")
+        print("Compression ratio : ",os.path.getsize(args.input)/os.path.getsize(args.output))
     except:
         print('Warning: Invalid output file')
         inpPath = list(os.path.splitext(args.input))
