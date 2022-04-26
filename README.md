@@ -1,6 +1,6 @@
 # Image-Impression
 
-**Linear Algebra Project** - Image Compression/Encryption ?
+## Image Compression Using SVD
 
 ## Teammates:
 
@@ -10,9 +10,7 @@
 
 ## About
 
-Harr wavelet transformation and then applying huffman coding to the resulting sparse matrix
-
-- https://www.cmi.ac.in/~ksutar/NLA2013/imagecompression.pdf
+In the scope of this project, we applied SVD to images converted to matrices and later dropped trailing singular values to cause “lossy” compression.
 
 ## Execution
 
@@ -20,10 +18,10 @@ Harr wavelet transformation and then applying huffman coding to the resulting sp
 - Run `example.sh` or `example.bat` for an example
 - Run `compressor.py`
 
-## To-Do 
+## References
 
-- Figure out transformation : 
-  - SVD 
-  - DCT 
-  - And more 
-- Decide b/w huffman coding and LZ77
+-	https://ieeexplore.ieee.org/abstract/document/1093309
+-	https://www.cmi.ac.in/~ksutar/NLA2013/imagecompression.pdf
+-	https://web.stanford.edu/class/cme335/lecture6.pdf
+- https://web.mit.edu/be.400/www/SVD/Singular_Value_Decomposition.htm
+-	Lossy image compression using singular value decomposition and wavelet difference reduction - ScienceDirect
